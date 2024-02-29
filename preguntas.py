@@ -12,6 +12,13 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 
+import csv
+
+csv_file = 'data.csv'
+
+with open(csv_file, 'r') as f:
+        reader = csv.reader(f,delimiter='\t')
+        data = list(reader)
 
 def pregunta_01():
     """
@@ -21,7 +28,13 @@ def pregunta_01():
     214
 
     """
-    return
+
+    second_column = [row[1] for row in data]
+
+    second_column = [int(i) for i in second_column]
+    s=sum(second_column)    
+
+    return s
 
 
 def pregunta_02():
@@ -39,7 +52,25 @@ def pregunta_02():
     ]
 
     """
-    return
+
+    first_column = [row[0] for row in data]
+    first_column = sorted(first_column)
+
+    #Convert first_column to a dictionary with a 1 as the value for each key
+
+    first_column_tuples = [(i,1) for i in first_column]
+
+    first_column_tuples_dict = {}
+
+    for key, value in first_column_tuples:
+        if key not in first_column_tuples_dict:
+            first_column_tuples_dict[key] = 0
+        first_column_tuples_dict[key]+=value
+
+    #Convert first_column_tuples_dict to a list of tuples
+        
+    first_column_tuples = list(first_column_tuples_dict.items())
+    return first_column_tuples
 
 
 def pregunta_03():
@@ -57,7 +88,20 @@ def pregunta_03():
     ]
 
     """
-    return
+
+    first_second_column = [(row[0],int(row[1])) for row in data]
+
+    first_second_column = sorted(first_second_column)
+
+    first_second_column_dict = {}
+
+    for key, value in first_second_column:
+        if key not in first_second_column_dict:
+            first_second_column_dict[key] = 0
+    first_second_column_dict[key]+=value
+
+    first_second_column = list(first_second_column_dict.items())
+    return first_second_column
 
 
 def pregunta_04():
@@ -82,7 +126,17 @@ def pregunta_04():
     ]
 
     """
-    return
+
+    third_column = sorted([(row[2].split('-')[1],1) for row in data])
+    third_column_dict = {}
+
+    for key, value in third_column:
+        if key not in third_column_dict:
+            third_column_dict[key] = 0
+        third_column_dict[key]+=value
+
+    third_column = list(third_column_dict.items())
+    return third_column
 
 
 def pregunta_05():
@@ -100,7 +154,22 @@ def pregunta_05():
     ]
 
     """
-    return
+
+    first_second_column = [(row[0],int(row[1])) for row in data]
+
+    first_second_column = sorted(first_second_column)
+
+    first_second_column_dict = {}
+
+    for key, value in first_second_column:
+        if key not in first_second_column_dict:
+            first_second_column_dict[key] = []
+        first_second_column_dict[key].append(value)
+    first_second_column_dict={key:(max(value),min(value)) for key, value in first_second_column_dict.items()}
+
+    first_second_column = list(first_second_column_dict.items())
+    first_second_column = [(i[0],i[1][0],i[1][1]) for i in first_second_column]
+    return first_second_column
 
 
 def pregunta_06():
@@ -125,7 +194,22 @@ def pregunta_06():
     ]
 
     """
-    return
+    fifth_column = [row[4].split(',') for row in data]
+    fifth_column = sorted([i for sublist in fifth_column for i in sublist])
+    fifth_column = [i.split(':') for i in fifth_column]
+
+    fifth_column_dict = {}
+
+    for key, value in fifth_column:
+        if key not in fifth_column_dict:
+            fifth_column_dict[key] = []
+        fifth_column_dict[key].append(int(value))
+    fifth_column_dict={key:(min(value),max(value)) for key, value in fifth_column_dict.items()}
+
+    fifth_column = list(fifth_column_dict.items())
+    fifth_column = [(i[0],i[1][0],i[1][1]) for i in fifth_column]
+
+    return fifth_column
 
 
 def pregunta_07():
@@ -149,7 +233,18 @@ def pregunta_07():
     ]
 
     """
-    return
+
+    second_first_column = [(int(row[1]),row[0]) for row in data]
+
+    second_first_column_dict = {}
+
+    for key, value in second_first_column:
+        if key not in second_first_column_dict:
+            second_first_column_dict[key] = []
+        second_first_column_dict[key].append(value)
+
+    second_first_column = sorted(list(second_first_column_dict.items()))
+    return second_first_column
 
 
 def pregunta_08():
@@ -174,7 +269,11 @@ def pregunta_08():
     ]
 
     """
-    return
+
+    second_first_column = pregunta_07()
+    second_first_column_set=[(row[0],list(set(row[1]))) for row in second_first_column]
+
+    return second_first_column_set
 
 
 def pregunta_09():
@@ -197,7 +296,22 @@ def pregunta_09():
     }
 
     """
-    return
+
+    fifth_column = [row[4].split(',') for row in data]
+    fifth_column = sorted([i for sublist in fifth_column for i in sublist])
+    fifth_column = [i.split(':') for i in fifth_column]
+
+    fifth_column_tuples = [(i[0],1) for i in fifth_column]
+
+    fifth_column_tuples_dict = {}
+
+    for key, value in fifth_column_tuples:
+        if key not in fifth_column_tuples_dict:
+            fifth_column_tuples_dict[key] = 0
+        fifth_column_tuples_dict[key]+=value
+
+    fifth_column_tuples = list(fifth_column_tuples_dict.items())
+    return fifth_column_tuples
 
 
 def pregunta_10():
@@ -218,7 +332,9 @@ def pregunta_10():
 
 
     """
-    return
+
+    first_fourth_fifth_column = [(row[0],len(row[3].split(',')),len(row[4].split(','))) for row in data]
+    return first_fourth_fifth_column
 
 
 def pregunta_11():
@@ -237,9 +353,19 @@ def pregunta_11():
         "g": 35,
     }
 
-
+    
     """
-    return
+
+    fourth_second_column=[(row[3].split(','),int(row[1])) for row in data]
+
+    fourth_second_column_tuples=sorted([(row[0][i],row[1]) for row in fourth_second_column for i in range(len(row[0]))])
+    fourth_second_column_tuples_dict = {}
+
+    for key, value in fourth_second_column_tuples:
+        if key not in fourth_second_column_tuples_dict:
+            fourth_second_column_tuples_dict[key] = 0
+        fourth_second_column_tuples_dict[key]+=value
+    return fourth_second_column_tuples_dict
 
 
 def pregunta_12():
@@ -257,4 +383,16 @@ def pregunta_12():
     }
 
     """
-    return
+
+    first_column = [row[0] for row in data]
+    fifth_column = [row[4].split(',') for row in data]
+    fifth_column = [[i.split(':') for i in row] for row in fifth_column]
+    fifth_column = [sum([int(i[1]) for i in row]) for row in fifth_column]
+
+    first_fifth_column = sorted(list(zip(first_column,fifth_column)))
+    first_fifth_column_dict={}
+    for key, value in first_fifth_column:
+        if key not in first_fifth_column_dict:
+            first_fifth_column_dict[key] = 0
+        first_fifth_column_dict[key]+=value
+    return first_fifth_column_dict
