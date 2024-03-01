@@ -28,6 +28,7 @@ def pregunta_01():
     214
 
     """
+    
 
     second_column = [row[1] for row in data]
 
