@@ -272,7 +272,7 @@ def pregunta_08():
     """
 
     second_first_column = pregunta_07()
-    second_first_column_set=sorted([(row[0],list(set(row[1]))) for row in second_first_column])
+    second_first_column_set=[(row[0],sorted(list(set(row[1])))) for row in second_first_column]
 
     return second_first_column_set
 
