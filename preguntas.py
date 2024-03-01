@@ -99,7 +99,7 @@ def pregunta_03():
     for key, value in first_second_column:
         if key not in first_second_column_dict:
             first_second_column_dict[key] = 0
-    first_second_column_dict[key]+=value
+        first_second_column_dict[key]+=value
 
     first_second_column = list(first_second_column_dict.items())
     return first_second_column
