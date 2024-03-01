@@ -311,8 +311,7 @@ def pregunta_09():
             fifth_column_tuples_dict[key] = 0
         fifth_column_tuples_dict[key]+=value
 
-    fifth_column_tuples = list(fifth_column_tuples_dict.items())
-    return fifth_column_tuples
+    return fifth_column_tuples_dict
 
 
 def pregunta_10():
